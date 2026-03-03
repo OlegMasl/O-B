@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>С любовью..</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffe3e3 0%, #fff5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .valentine-wrapper {
+            position: relative;
+            z-index: 20;
+            max-width: 600px;
+            width: 90%;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== СЕРДЦЕ ===== */
+        .heart-wrapper {
+            position: relative;
+            width: min(200px, 40vw);
+            height: min(200px, 40vw);
+            margin: min(30px, 5vw) auto min(40px, 6vw);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 15px rgba(255, 50, 100, 0.5));
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .heart-wrapper:active {
+            transform: scale(0.95);
+        }
+
+        .pulse-heart {
+            width: min(140px, 28vw);
+            height: min(130px, 26vw);
+            background: linear-gradient(145deg, #ff1744, #ff1744);
+            transform: rotate(-45deg);
+            border-radius: 0 0 20px 0;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(255, 30, 80, 0.6);
+            animation: doubleBeat 1.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pulse-heart::before,
+        .pulse-heart::after {
+            content: '';
+            position: absolute;
+            width: min(140px, 28vw);
+            height: min(130px, 26vw);
+            background: linear-gradient(145deg, #ff1744, #ff1744);
+            border-radius: 50%;
+        }
+
+        .pulse-heart::before {
+            top: -50%;
+            left: 0;
+        }
+
+        .pulse-heart::after {
+            top: 0;
+            left: 50%;
+        }
+
+        @keyframes doubleBeat {
+            0% { transform: rotate(-45deg) scale(1); filter: brightness(1); box-shadow: 0 10px 30px rgba(255, 30, 80, 0.6); }
+            15% { transform: rotate(-45deg) scale(1.25); filter: brightness(1.4); box-shadow: 0 25px 45px rgba(255, 20, 70, 1); }
+            30% { transform: rotate(-45deg) scale(1.1); filter: brightness(1.2); box-shadow: 0 18px 38px rgba(255, 25, 75, 0.9); }
+            45% { transform: rotate(-45deg) scale(1.2); filter: brightness(1.3); box-shadow: 0 22px 42px rgba(255, 22, 72, 0.95); }
+            60% { transform: rotate(-45deg) scale(1.05); filter: brightness(1.1); box-shadow: 0 15px 35px rgba(255, 28, 78, 0.8); }
+            100% { transform: rotate(-45deg) scale(1); filter: brightness(1); box-shadow: 0 10px 30px rgba(255, 30, 80, 0.6); }
+        }
+
+        .echo-1, .echo-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 80, 120, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 4;
+            animation: echoPulse 1.2s infinite ease-out;
+        }
+
+        .echo-1 { width: min(180px, 36vw); height: min(180px, 36vw); animation-delay: 0.1s; opacity: 0.5; }
+        .echo-2 { width: min(220px, 44vw); height: min(220px, 44vw); animation-delay: 0.2s; opacity: 0.3; }
+
+        @keyframes echoPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            20% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+        }
+
+        .aura-glow, .aura-glow-2, .aura-glow-3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .aura-glow {
+            width: min(160px, 32vw); height: min(160px, 32vw);
+            background: radial-gradient(circle, rgba(255, 80, 120, 0.8) 0%, rgba(255, 50, 100, 0.4) 40%, transparent 75%);
+            filter: blur(min(12px, 2.5vw)); z-index: 2;
+            animation: auraPulse 2s infinite alternate;
+        }
+
+        .aura-glow-2 {
+            width: min(220px, 44vw); height: min(220px, 44vw);
+            background: radial-gradient(circle, rgba(255, 120, 150, 0.6) 0%, rgba(255, 70, 110, 0.2) 40%, transparent 80%);
+            filter: blur(min(18px, 3.5vw)); z-index: 1;
+            animation: auraPulse2 2.5s infinite alternate-reverse;
+        }
+
+        .aura-glow-3 {
+            width: min(280px, 56vw); height: min(280px, 56vw);
+            background: radial-gradient(circle, rgba(255, 150, 170, 0.4) 0%, rgba(255, 100, 130, 0.1) 40%, transparent 85%);
+            filter: blur(min(25px, 5vw)); z-index: 0;
+            animation: auraPulse3 3s infinite alternate;
+        }
+
+        @keyframes auraPulse {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+        }
+
+        @keyframes auraPulse2 {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        @keyframes auraPulse3 {
+            0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.7); }
+            100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.7); }
+        }
+
+        /* ===== ФОТОРАМКА ===== */
+        .photo-frame {
+            width: min(280px, 60vw);
+            height: min(280px, 60vw);
+            border-radius: min(15px, 3vw);
+            background: #ffffff;
+            padding: min(10px, 2vw);
+            box-shadow: 0 min(15px, 3vw) min(25px, 5vw) rgba(220, 100, 120, 0.4), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(5px, 1vw) #ffd9e0;
+            margin: min(20px, 4vw) 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 15;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .photo-frame:hover {
+            transform: perspective(500px) rotateX(2deg) rotateY(5deg) scale(1.05);
+            box-shadow: 0 min(25px, 5vw) min(35px, 7vw) rgba(255, 70, 120, 0.6), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(8px, 1.5vw) #ffb3c6;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: min(10px, 2vw);
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== ГРАДИЕНТНЫЙ ТЕКСТ (ТЕПЕРЬ НАД ТАЙМЕРОМ) ===== */
+        .gradient-text {
+            text-align: center;
+            margin: min(15px, 3vw) 0 min(10px, 2vw);
+            font-size: clamp(22px, 6vw, 28px);
+            font-weight: 800;
+            line-height: 1.3;
+            text-shadow: 0 0 10px rgba(104, 11, 141, 0.3);
+            width: 100%;
+        }
+
+        .gradient-text p {
+            background: linear-gradient(135deg, #dd00fa, #ffb4f3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 5px 0;
+            text-shadow: 0 0 15px rgba(250, 150, 200, 0.5);
+        }
+
+        /* ===== ТАЙМЕР (УВЕЛИЧЕН) ===== */
+        .timer-container {
+            background: #ffffff;
+            padding: min(22px, 3vw) min(20px, 2.5vw);
+            border-radius: min(12px, 2vw);
+            margin: min(8px, 1.5vw) 0 min(20px, 4vw);
+            box-shadow: 0 min(8px, 1.5vw) min(16px, 3vw) rgba(220, 100, 120, 0.4), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(5px, 1vw) #ffd9e0;
+            width: 70%;
+            text-align: center;
+        }
+
+        .timer-title {
+            color: #ff1744;
+            font-size: clamp(14px, 3.5vw, 16px);
+            margin-bottom: min(8px, 1.5vw);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .timer-units {
+            display: flex;
+            justify-content: center;
+            gap: clamp(5px, 1.5vw, 8px);
+            flex-wrap: wrap;
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: clamp(45px, 9vw, 55px);
+        }
+
+        .unit-value {
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff1744, #ff8da1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(255, 23, 68, 0.4);
+            line-height: 1.2;
+        }
+
+        .unit-label {
+            font-size: clamp(10px, 2.5vw, 12px);
+            color: #ff6b8b;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 3px;
+        }
+
+        /* ===== БЛОК ПРИЧИН ===== */
+        .reason-container {
+            background: #ffffff;
+            padding: min(25px, 4vw) min(20px, 3vw);
+            border-radius: min(15px, 3vw);
+            margin: min(20px, 4vw) 0;
+            box-shadow: 0 min(15px, 3vw) min(25px, 5vw) rgba(220, 100, 120, 0.3), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(5px, 1vw) #ffd9e0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reason-container:hover {
+            box-shadow: 0 min(20px, 4vw) min(30px, 6vw) rgba(220, 100, 120, 0.5), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(6px, 1.2vw) #ffb3c6;
+        }
+
+        .reason-title {
+            color: #ff1744;
+            font-size: clamp(16px, 4vw, 18px);
+            margin-bottom: min(15px, 3vw);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .reason-text {
+            font-size: clamp(16px, 3.5vw, 18px);
+            color: #333;
+            line-height: 1.5;
+            font-style: italic;
+            min-height: clamp(50px, 10vh, 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 min(15px, 2vw);
+        }
+
+        /* ===== БУКЕТ ЦВЕТОВ ===== */
+        .bouquet-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bouquet-image {
+            max-width: min(600px, 90%);
+            max-height: min(70vh, 70%);
+            width: auto;
+            height: auto;
+            border-radius: min(15px, 3vw);
+            box-shadow: 0 0 min(50px, 10vw) rgba(255, 200, 220, 0.8), 
+                       0 0 0 min(5px, 1vw) #ffffff, 
+                       0 0 0 min(10px, 2vw) #ffb3c6;
+            margin-bottom: min(30px, 5vh);
+            animation: bouquetAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bouquet-message {
+            font-size: clamp(28px, 8vw, 48px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff0f5, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 min(30px, 5vw) #ff99aa, 0 0 min(60px, 10vw) #ff1744;
+            animation: messageAppear 0.8s ease;
+            text-align: center;
+            padding: 0 20px;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        .close-bouquet {
+            position: absolute;
+            top: max(15px, 3vh);
+            right: max(15px, 3vw);
+            font-size: clamp(30px, 8vw, 50px);
+            color: white;
+            cursor: pointer;
+            width: clamp(40px, 10vw, 60px);
+            height: clamp(40px, 10vw, 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: min(15px, 3vw);
+            transition: 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .close-bouquet:hover {
+            background: #ff1744;
+            transform: rotate(90deg);
+            border-color: white;
+        }
+
+        @keyframes bouquetAppear {
+            0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        @keyframes messageAppear {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .close-gallery {
+            position: absolute;
+            top: max(15px, 3vh);
+            right: max(15px, 3vw);
+            font-size: clamp(30px, 8vw, 40px);
+            color: white;
+            cursor: pointer;
+            z-index: 1002;
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: min(15px, 3vw);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .close-gallery:hover {
+            background: rgba(255, 23, 68, 0.8);
+            transform: rotate(90deg);
+            border-color: white;
+        }
+
+        .carousel-2d-container {
+            position: relative;
+            width: min(600px, 95vw);
+            height: min(600px, 95vw);
+            max-width: 600px;
+            max-height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+        }
+
+        .carousel-2d-container:active {
+            cursor: grabbing;
+        }
+
+        .carousel-2d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s ease-out;
+            transform-origin: center center;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: min(200px, 20vw);
+            height: min(200px, 20vw);
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 min(10px, 2vw) min(30px, 6vw) rgba(0, 0, 0, 0.5), 
+                       0 0 0 min(3px, 0.5vw) #ffffff, 
+                       0 0 0 min(5px, 1vw) rgba(255, 200, 220, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        .carousel-slide:hover {
+            transform: scale(1.3) translateZ(30px);
+            box-shadow: 0 min(20px, 4vw) min(40px, 8vw) rgba(255, 70, 120, 0.8), 
+                       0 0 0 min(3px, 0.5vw) #ffffff, 
+                       0 0 0 min(7px, 1.5vw) #ff99aa;
+            z-index: 10;
+            filter: brightness(1.2);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: rotate(0deg);
+        }
+
+        .select-photo-btn {
+            position: absolute;
+            bottom: max(20px, 3vh);
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(145deg, #ff1744, #ff1744);
+            color: white;
+            border: none;
+            padding: clamp(12px, 3vw, 15px) clamp(30px, 8vw, 50px);
+            border-radius: min(15px, 3vw);
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 min(10px, 2vw) min(30px, 6vw) rgba(255, 23, 68, 0.5), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(5px, 1vw) #ffb3c6;
+            z-index: 1002;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .select-photo-btn:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 min(20px, 4vw) min(40px, 8vw) rgba(255, 23, 68, 0.8), 
+                       0 0 0 min(2px, 0.5vw) #ffffff, 
+                       0 0 0 min(7px, 1.5vw) #ff99aa;
+        }
+
+        .select-photo-btn:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .photo-indicator {
+            position: absolute;
+            bottom: max(80px, 12vh);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: min(12px, 2vw);
+            z-index: 1002;
+            background: rgba(255, 255, 255, 0.15);
+            padding: min(12px, 2vw) min(24px, 4vw);
+            border-radius: min(15px, 3vw);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .indicator-dot {
+            width: min(12px, 3vw);
+            height: min(12px, 3vw);
+            border-radius: min(3px, 1vw);
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot:hover {
+            background: #ff99aa;
+            transform: scale(1.3);
+        }
+
+        .indicator-dot.active {
+            background: #ff1744;
+            box-shadow: 0 0 min(20px, 4vw) #ff1744;
+            transform: scale(1.2);
+        }
+
+        .rotation-hint {
+            position: absolute;
+            top: max(15px, 3vh);
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(12px, 3vw, 16px);
+            background: rgba(255, 255, 255, 0.15);
+            padding: min(8px, 2vw) min(16px, 4vw);
+            border-radius: min(15px, 3vw);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 1002;
+            pointer-events: none;
+            animation: hintFade 2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes hintFade {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .falling-heart {
+            position: fixed;
+            top: -10vh;
+            font-size: clamp(16px, 4vw, 24px);
+            opacity: 0;
+            color: #ff8da1;
+            user-select: none;
+            pointer-events: none;
+            z-index: 5;
+            animation: fall linear forwards;
+            filter: drop-shadow(0 min(5px, 1vw) min(8px, 2vw) rgba(255, 80, 120, 0.4));
+        }
+
+        @keyframes fall {
+            0% { opacity: 0.1; transform: translateY(0) rotate(0deg) scale(0.8); }
+            15% { opacity: 0.9; transform: translateY(2vh) rotate(20deg) scale(1); }
+            80% { opacity: 0.8; transform: translateY(80vh) rotate(320deg) scale(0.9); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(360deg) scale(0.5); }
+        }
+
+        /* Специальные стили для очень маленьких экранов */
+        @media (max-width: 380px) {
+            .timer-unit {
+                min-width: 42px;
+            }
+            .unit-value {
+                font-size: 20px;
+            }
+            .unit-label {
+                font-size: 9px;
+            }
+            .photo-indicator {
+                bottom: 70px;
+            }
+            .rotation-hint {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+        }
+
+        /* Стили для альбомной ориентации на мобильных */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .carousel-2d-container {
+                width: min(400px, 70vh);
+                height: min(400px, 70vh);
+            }
+            .carousel-slide {
+                width: min(100px, 15vh);
+                height: min(100px, 15vh);
+            }
+            .select-photo-btn {
+                bottom: 10px;
+                padding: 8px 30px;
+                font-size: 14px;
+            }
+            .photo-indicator {
+                bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="valentine-wrapper">
+        <!-- СЕРДЦЕ -->
+        <div class="heart-wrapper" id="heartWrapper">
+            <div class="echo-1"></div>
+            <div class="echo-2"></div>
+            <div class="aura-glow"></div>
+            <div class="aura-glow-2"></div>
+            <div class="aura-glow-3"></div>
+            <div class="pulse-heart"></div>
+        </div>
+
+        <!-- Фоторамка -->
+        <div class="photo-frame" id="photoFrame">
+            <div class="photo-placeholder" id="mainPhoto"></div>
+        </div>
+
+        <!-- ГРАДИЕНТНЫЙ ТЕКСТ (ТЕПЕРЬ НАД ТАЙМЕРОМ) -->
+        <div class="gradient-text">
+            <p>Моя любовь к тебе растёт</p>
+            <p>с каждым ударом сердца.</p>
+        </div>
+
+        <!-- ТАЙМЕР ЛЮБВИ (УВЕЛИЧЕН) -->
+        <div class="timer-container">
+            <div class="timer-title">💕 Мы вместе уже:</div>
+            <div class="timer-units" id="timerUnits"></div>
+        </div>
+
+        <!-- Блок случайных причин -->
+        <div class="reason-container">
+            <div class="reason-title">💖 Почему я тебя люблю 💖</div>
+            <div class="reason-text" id="loveReason"></div>
+        </div>
+    </div>
+
+    <!-- Галерея -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-content">
+            <span class="close-gallery" id="closeGallery">&times;</span>
+            
+            <div class="carousel-2d-container" id="carouselContainer">
+                <div class="carousel-2d" id="carousel2D">
+                    <!-- Слайды будут добавлены через JS -->
+                </div>
+            </div>
+
+            <div class="photo-indicator" id="photoIndicator"></div>
+
+            <button class="select-photo-btn" id="selectPhoto">Выбрать это фото</button>
+        </div>
+    </div>
+
+    <!-- Букет цветов (появляется при 3 кликах на сердце) -->
+    <div class="bouquet-overlay" id="bouquetOverlay">
+        <span class="close-bouquet" id="closeBouquet">&times;</span>
+        <img class="bouquet-image" src="byket.png" alt="Букет цветов">
+        <div class="bouquet-message">С 8 Марта, Владуля! 💐</div>
+    </div>
+
+    <script>
+(function() {
+    // ===== НАСТРОЙКИ =====
+    const START_DATE = new Date(2026, 0, 31, 17, 30, 0);
+    const PHOTOS = [
+        'Love.jpg',
+        '1.jpg',
+        '2.jpg',
+        '3.jpg',
+        '4.jpg'
+    ];
+
+    const LOVE_REASONS = [
+        'За твою улыбку, которая освещает мой день ☀️',
+        'За то, как ты смотришь на меня 💕',
+        'За твою доброту и заботу 🌸',
+        'За наши разговоры по ночам 🌙',
+        'За то, что ты всегда понимаешь меня 🫂',
+        'За твой смех — он заразителен ✨',
+        'За то, что с тобой я стал лучше 🌱',
+        'За то, что ты — это ты. И я тебя люблю ❤️',
+        'За все «утренние» и «спокойной ночи», которые стали моим ритуалом ☀️🌙',
+        'За то, как ты светишься изнутри, когда у тебя что-то получается 💡',
+        'За твои руки — я чувствую себя в них в безопасности 🤲',
+        'За твои крепкие объятия 🤗',
+        'За то, что ты веришь в меня 🌟',
+        'За то, что мы молчим вместе — и нам не бывает неловко 🤫',
+        'За наши маленькие приключения 🗺️'
+    ];
+
+    let currentPhotoIndex = 0;
+    let currentAngle = 0;
+    let isDragging = false;
+    let startX, startAngle;
+    let slides = [];
+    
+    // Для 3 кликов на сердце
+    let heartClickCount = 0;
+
+    // ===== ЗАГРУЗКА СОХРАНЕННОЙ ФОТОГРАФИИ =====
+    function loadSavedPhoto() {
+        const savedIndex = localStorage.getItem('selectedPhotoIndex');
+        if (savedIndex !== null) {
+            const index = parseInt(savedIndex);
+            if (!isNaN(index) && index >= 0 && index < PHOTOS.length) {
+                currentPhotoIndex = index;
+            }
+        }
+        setMainPhoto(currentPhotoIndex);
+    }
+
+    // ===== СОХРАНЕНИЕ ВЫБРАННОЙ ФОТОГРАФИИ =====
+    function saveSelectedPhoto(index) {
+        localStorage.setItem('selectedPhotoIndex', index.toString());
+    }
+
+    // ===== ТАЙМЕР =====
+    function updateTimer() {
+        const now = new Date();
+        const diff = now - START_DATE;
+        
+        if (diff < 0) {
+            document.getElementById('timerUnits').innerHTML = '<div class="timer-unit"><span class="unit-value">Жду с нетерпением!</span></div>';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const units = [
+            { value: days, label: 'дн' },
+            { value: hours, label: 'ч' },
+            { value: minutes, label: 'мин' },
+            { value: seconds, label: 'сек' }
+        ];
+
+        const timerHtml = units.map(unit => `
+            <div class="timer-unit">
+                <span class="unit-value">${unit.value}</span>
+                <span class="unit-label">${unit.label}</span>
+            </div>
+        `).join('');
+
+        document.getElementById('timerUnits').innerHTML = timerHtml;
+    }
+
+    // ===== СЛУЧАЙНАЯ ПРИЧИНА =====
+    function setRandomReason() {
+        const randomIndex = Math.floor(Math.random() * LOVE_REASONS.length);
+        document.getElementById('loveReason').textContent = LOVE_REASONS[randomIndex];
+    }
+
+    // ===== БУКЕТ ЦВЕТОВ =====
+    function showBouquet() {
+        const overlay = document.getElementById('bouquetOverlay');
+        overlay.style.display = 'flex';
+    }
+
+    // ===== ГАЛЕРЕЯ =====
+    function initGallery() {
+        const carousel = document.getElementById('carousel2D');
+        const indicator = document.getElementById('photoIndicator');
+        
+        carousel.innerHTML = '';
+        indicator.innerHTML = '';
+        slides = [];
+
+        // Адаптивный радиус в зависимости от размера экрана
+        const radius = Math.min(220, window.innerWidth * 0.3);
+        const centerX = 0;
+        const centerY = 0;
+
+        PHOTOS.forEach((photo, index) => {
+            const angle = (index / PHOTOS.length) * Math.PI * 2;
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.dataset.index = index;
+            slide.dataset.angle = angle;
+            
+            slide.style.transform = `translate(${x}px, ${y}px)`;
+            
+            
+            const img = document.createElement('img');
+            img.src = photo;
+            img.alt = `Фото ${index + 1}`;
+            
+            slide.appendChild(img);
+            carousel.appendChild(slide);
+            slides.push(slide);
+
+            const dot = document.createElement('div');
+            dot.className = 'indicator-dot';
+            dot.dataset.index = index;
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rotateToIndex(index);
+            });
+            indicator.appendChild(dot);
+        });
+
+        setMainPhoto(currentPhotoIndex);
+        updateIndicator(currentPhotoIndex);
+        updatePhotoRotations(0);
+    }
+
+    function updatePhotoRotations(rotationAngle) {
+        slides.forEach((slide, index) => {
+            const compensationAngle = -rotationAngle;
+            const img = slide.querySelector('img');
+            if (img) {
+                img.style.transform = `rotate(${compensationAngle}deg)`;
+            }
+        });
+    }
+
+    function setMainPhoto(index) {
+        currentPhotoIndex = index;
+        document.getElementById('mainPhoto').style.backgroundImage = `url('${PHOTOS[index]}')`;
+    }
+
+    function updateIndicator(index) {
+        const dots = document.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    function rotateToIndex(index) {
+        const targetAngleDeg = -(index * (360 / PHOTOS.length));
+        
+        let diff = ((targetAngleDeg - currentAngle) % 360 + 540) % 360 - 180;
+        currentAngle += diff;
+        
+        const carousel = document.getElementById('carousel2D');
+        carousel.style.transform = `rotate(${currentAngle}deg)`;
+        
+        updatePhotoRotations(currentAngle);
+        updateIndicator(index);
+    }
+
+    // ===== ОБРАБОТЧИКИ ДЛЯ ПЕРЕТАСКИВАНИЯ =====
+    function initDragHandlers() {
+        const container = document.getElementById('carouselContainer');
+        const carousel = document.getElementById('carousel2D');
+        
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+            startAngle = currentAngle;
+            container.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = e.pageX - startX;
+            const angleDelta = (deltaX / 3) % 360;
+            currentAngle = startAngle + angleDelta;
+            
+           carousel.style.transform = `rotate(${currentAngle}deg)`;
+            updatePhotoRotations(currentAngle);
+            
+            const step = 360 / PHOTOS.length;
+            let rawIndex = Math.round((-currentAngle % 360) / step);
+            if (rawIndex < 0) rawIndex += PHOTOS.length;
+            const index = rawIndex % PHOTOS.length;
+            
+            updateIndicator(index);
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            }
+        });
+
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX;
+            startAngle = currentAngle;
+            container.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = e.touches[0].pageX - startX;
+            const angleDelta = (deltaX / 3) % 360;
+            currentAngle = startAngle + angleDelta;
+            
+            carousel.style.transform = `rotate(${currentAngle}deg)`;
+            updatePhotoRotations(currentAngle);
+            
+            const step = 360 / PHOTOS.length;
+            let rawIndex = Math.round((-currentAngle % 360) / step);
+            if (rawIndex < 0) rawIndex += PHOTOS.length;
+            const index = rawIndex % PHOTOS.length;
+            
+            updateIndicator(index);
+        });
+
+        window.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            }
+        });
+
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -5 : 5;
+            currentAngle += delta;
+            
+            carousel.style.transform = `rotate(${currentAngle}deg)`;
+            updatePhotoRotations(currentAngle);
+            
+            const step = 360 / PHOTOS.length;
+            let rawIndex = Math.round((-currentAngle % 360) / step);
+            if (rawIndex < 0) rawIndex += PHOTOS.length;
+            const index = rawIndex % PHOTOS.length;
+            
+            updateIndicator(index);
+        }, { passive: false });
+    }
+
+    // ===== ПАДАЮЩИЕ СЕРДЕЧКИ =====
+    (function() {
+        const MAX_HEARTS = 25;
+        let activeHearts = [];
+        
+        // МАССИВ С ПУТЯМИ К ВАШИМ ИЗОБРАЖЕНИЯМ СЕРДЕЧЕК
+        const heartImages = [
+            'сердце.png'
+        ];
+    
+        function createFallingHeart() {
+            if (activeHearts.length >= MAX_HEARTS) return;
+    
+            // Создаем КОНТЕЙНЕР для падающего сердца
+            const heartContainer = document.createElement('div');
+            heartContainer.classList.add('falling-heart');
+            
+            // Создаем ИЗОБРАЖЕНИЕ
+            const img = document.createElement('img');
+            
+            // Выбираем случайную картинку из массива
+            const randomIndex = Math.floor(Math.random() * heartImages.length);
+            img.src = heartImages[randomIndex];
+            
+            // Стили для изображения
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.display = 'block';
+            
+            // Добавляем картинку в контейнер
+            heartContainer.appendChild(img);
+    
+            // Размер сердечка
+            const size = Math.floor(Math.random() * 30) + 20; // 20-50px
+            heartContainer.style.width = size + 'px';
+            heartContainer.style.height = size + 'px';
+            
+            // Позиция по горизонтали
+            heartContainer.style.left = Math.random() * 100 + 'vw';
+            
+            // Анимация падения
+            const duration = (Math.random() * 5 + 5).toFixed(2); // 5-10 сек
+            heartContainer.style.animationDuration = duration + 's';
+            
+            const delay = (Math.random() * 3).toFixed(2);
+            heartContainer.style.animationDelay = delay + 's';
+    
+            // Добавляем на страницу
+            document.body.appendChild(heartContainer);
+            activeHearts.push(heartContainer);
+    
+            // Удаляем после окончания анимации
+            heartContainer.addEventListener('animationend', function() {
+                if (heartContainer.parentNode) {
+                    heartContainer.parentNode.removeChild(heartContainer);
+                }
+                const index = activeHearts.indexOf(heartContainer);
+                if (index > -1) activeHearts.splice(index, 1);
+            });
+        }
+    
+        // Запускаем падающие сердечки каждые 400мс
+        setInterval(createFallingHeart, 400);
+        
+        // При загрузке создаём несколько сразу
+        window.addEventListener('load', () => {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(createFallingHeart, i * 150);
+            }
+        });
+    })();
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    window.addEventListener('load', () => {
+        loadSavedPhoto(); // Загружаем сохраненное фото
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        setRandomReason();
+        initGallery();
+        initDragHandlers();
+    });
+
+    // Пересчет радиуса при изменении размера окна
+    window.addEventListener('resize', () => {
+        initGallery();
+        rotateToIndex(currentPhotoIndex);
+    });
+
+    // ===== ОБРАБОТЧИКИ =====
+    document.getElementById('heartWrapper').addEventListener('click', function() {
+        heartClickCount++;
+        console.log('Клик по сердцу:', heartClickCount); // Для отладки
+        
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFallingHeart, i * 70);
+        }
+        
+        if (heartClickCount >= 3) {
+            showBouquet();
+            heartClickCount = 0; // Сбрасываем счетчик после показа
+            console.log('Букет показан!'); // Для отладки
+        }
+    });
+
+    document.querySelector('.reason-container').addEventListener('click', setRandomReason);
+
+    const photoFrame = document.getElementById('photoFrame');
+    const galleryModal = document.getElementById('galleryModal');
+    const closeGallery = document.getElementById('closeGallery');
+
+    photoFrame.addEventListener('click', () => {
+        galleryModal.style.display = 'flex';
+        rotateToIndex(currentPhotoIndex);
+    });
+
+    closeGallery.addEventListener('click', () => {
+        galleryModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === galleryModal) {
+            galleryModal.style.display = 'none';
+        }
+    });
+
+    document.getElementById('selectPhoto').addEventListener('click', () => {
+        const step = 360 / PHOTOS.length;
+        let rawIndex = Math.round((-currentAngle % 360) / step);
+        if (rawIndex < 0) rawIndex += PHOTOS.length;
+        const index = rawIndex % PHOTOS.length;
+        
+        setMainPhoto(index);
+        saveSelectedPhoto(index); // Сохраняем выбранное фото
+        galleryModal.style.display = 'none';
+    });
+
+    const bouquetOverlay = document.getElementById('bouquetOverlay');
+    const closeBouquet = document.getElementById('closeBouquet');
+
+    closeBouquet.addEventListener('click', () => {
+        bouquetOverlay.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === bouquetOverlay) {
+            bouquetOverlay.style.display = 'none';
+        }
+    });
+})();
+    </script>
+</body>
+</html>
