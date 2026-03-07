@@ -542,6 +542,27 @@
             filter: brightness(1.2);
         }
 
+        /* Стиль для выбранного слайда */
+        .carousel-slide.selected {
+            box-shadow: 0 0 0 min(4px, 0.8vw) #ff1744,
+                        0 0 min(30px, 6vw) min(10px, 2vw) rgba(255, 23, 68, 0.7),
+                        0 min(10px, 2vw) min(30px, 6vw) rgba(255, 23, 68, 0.5);
+            transform: scale(1.1) translateZ(15px);
+            z-index: 5;
+            animation: selectedPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes selectedPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 min(4px, 0.8vw) #ff1744,
+                            0 0 min(30px, 6vw) min(10px, 2vw) rgba(255, 23, 68, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 min(6px, 1vw) #ff1744,
+                            0 0 min(40px, 8vw) min(15px, 3vw) rgba(255, 23, 68, 0.9);
+            }
+        }
+
         .carousel-slide img {
             width: 100%;
             height: 100%;
@@ -864,6 +885,17 @@
         overlay.style.display = 'flex';
     }
 
+    // ===== ФУНКЦИЯ ДЛЯ ОБНОВЛЕНИЯ ПОДСВЕТКИ ВЫБРАННОГО СЛАЙДА =====
+    function updateSelectedSlide(index) {
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.add('selected');
+            } else {
+                slide.classList.remove('selected');
+            }
+        });
+    }
+
     // ===== ГАЛЕРЕЯ =====
     function initGallery() {
         const carousel = document.getElementById('carousel2D');
@@ -909,6 +941,7 @@
 
         setMainPhoto(currentPhotoIndex);
         updateIndicator(currentPhotoIndex);
+        updateSelectedSlide(currentPhotoIndex);
         updatePhotoRotations(0);
     }
 
@@ -949,6 +982,7 @@
         
         updatePhotoRotations(currentAngle);
         updateIndicator(index);
+        updateSelectedSlide(index);
     }
 
     // ===== ОБРАБОТЧИКИ ДЛЯ ПЕРЕТАСКИВАНИЯ =====
@@ -971,7 +1005,7 @@
             const angleDelta = (deltaX / 3) % 360;
             currentAngle = startAngle + angleDelta;
             
-           carousel.style.transform = `rotate(${currentAngle}deg)`;
+            carousel.style.transform = `rotate(${currentAngle}deg)`;
             updatePhotoRotations(currentAngle);
             
             const step = 360 / PHOTOS.length;
@@ -980,6 +1014,7 @@
             const index = rawIndex % PHOTOS.length;
             
             updateIndicator(index);
+            updateSelectedSlide(index);
         });
 
         window.addEventListener('mouseup', () => {
@@ -1013,6 +1048,7 @@
             const index = rawIndex % PHOTOS.length;
             
             updateIndicator(index);
+            updateSelectedSlide(index);
         });
 
         window.addEventListener('touchend', () => {
@@ -1036,6 +1072,7 @@
             const index = rawIndex % PHOTOS.length;
             
             updateIndicator(index);
+            updateSelectedSlide(index);
         }, { passive: false });
     }
 
@@ -1044,26 +1081,54 @@
         const MAX_HEARTS = 25;
         let activeHearts = [];
         
+        // МАССИВ С ПУТЯМИ К ВАШИМ ИЗОБРАЖЕНИЯМ СЕРДЕЧЕК
+        const heartImages = [
+            'сердце.png'
+        ];
+
         function createFallingHeart() {
             if (activeHearts.length >= MAX_HEARTS) return;
-    
+
+            // Создаем КОНТЕЙНЕР для падающего сердца
             const heartContainer = document.createElement('div');
             heartContainer.classList.add('falling-heart');
             
-            heartContainer.innerHTML = '❤️';
-            heartContainer.style.fontSize = (Math.floor(Math.random() * 30) + 20) + 'px';
+            // Создаем ИЗОБРАЖЕНИЕ
+            const img = document.createElement('img');
             
+            // Выбираем случайную картинку из массива
+            const randomIndex = Math.floor(Math.random() * heartImages.length);
+            img.src = heartImages[randomIndex];
+            
+            // Стили для изображения
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.display = 'block';
+            
+            // Добавляем картинку в контейнер
+            heartContainer.appendChild(img);
+
+            // Размер сердечка
+            const size = Math.floor(Math.random() * 30) + 20; // 20-50px
+            heartContainer.style.width = size + 'px';
+            heartContainer.style.height = size + 'px';
+            
+            // Позиция по горизонтали
             heartContainer.style.left = Math.random() * 100 + 'vw';
             
-            const duration = (Math.random() * 5 + 5).toFixed(2);
+            // Анимация падения
+            const duration = (Math.random() * 5 + 5).toFixed(2); // 5-10 сек
             heartContainer.style.animationDuration = duration + 's';
             
             const delay = (Math.random() * 3).toFixed(2);
             heartContainer.style.animationDelay = delay + 's';
-    
+
+            // Добавляем на страницу
             document.body.appendChild(heartContainer);
             activeHearts.push(heartContainer);
-    
+
+            // Удаляем после окончания анимации
             heartContainer.addEventListener('animationend', function() {
                 if (heartContainer.parentNode) {
                     heartContainer.parentNode.removeChild(heartContainer);
@@ -1072,9 +1137,11 @@
                 if (index > -1) activeHearts.splice(index, 1);
             });
         }
-    
+
+        // Запускаем падающие сердечки каждые 400мс
         setInterval(createFallingHeart, 400);
         
+        // При загрузке создаём несколько сразу
         window.addEventListener('load', () => {
             for (let i = 0; i < 8; i++) {
                 setTimeout(createFallingHeart, i * 150);
@@ -1128,6 +1195,7 @@
         
         setMainPhoto(index);
         saveSelectedPhoto(index);
+        updateSelectedSlide(index);
         galleryModal.style.display = 'none';
     });
 
