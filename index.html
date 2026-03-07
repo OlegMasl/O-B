@@ -198,6 +198,12 @@
         }
 
         /* ===== КНОПКА ТАЙМЕРА ===== */
+        .button-icon {
+            width: 90%;    /* Растянуть на всю кнопку */
+            height: 90%;
+            object-fit: cover; /* Чтобы фото не искажалось */
+            border-radius: 50%; /* Если нужна круглая форма */
+          }
         .timer-button {
             width: min(60px, 12vw);
             height: min(60px, 12vw);
@@ -748,7 +754,7 @@
         </div>
 
         <!-- КНОПКА ТАЙМЕРА -->
-        <div class="timer-button" id="timerButton">⏰</div>
+        <div class="timer-button" id="timerButton"><img src="sec.png" alt="⏱️" class="button-icon"></div>
 
         <!-- ТАЙМЕР ЛЮБВИ (СКРЫТ ПО УМОЛЧАНИЮ) -->
         <div class="timer-container" id="timerContainer">
